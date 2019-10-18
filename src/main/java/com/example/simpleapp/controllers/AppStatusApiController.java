@@ -17,7 +17,7 @@ public class AppStatusApiController {
         return ResponseEntity.ok("");
     }
 
-    @PostMapping("configure")
+    @PostMapping("/configure")
     public ResponseEntity configure() {
         return ResponseEntity.ok("");
     }
