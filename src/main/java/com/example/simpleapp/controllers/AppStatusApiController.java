@@ -6,11 +6,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 public class AppStatusApiController {
+    private List<String> parameters = new ArrayList<>();
+
     @PostMapping("/install")
-    public ResponseEntity install(@RequestParam("InstallId") String installId) {
-        return ResponseEntity.ok(installId);
+    public ResponseEntity install(@RequestParam("tenantId") String tenantId, @RequestParam("userId") String userId, @RequestParam("oauth_consumer_key") String oauth_consumer_key) {
+        parameters.add(tenantId);
+        parameters.add(userId);
+        parameters.add(oauth_consumer_key);
+        return ResponseEntity.ok(tenantId);
     }
 
     @PostMapping("/uninstall")
@@ -25,7 +33,7 @@ public class AppStatusApiController {
 
     @GetMapping("/status")
     public ResponseEntity status() {
-        return ResponseEntity.ok("OK");
+        return ResponseEntity.ok(parameters.toString());
     }
 }
 
