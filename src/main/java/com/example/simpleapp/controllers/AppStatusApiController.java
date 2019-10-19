@@ -14,9 +14,20 @@ public class AppStatusApiController {
     private List<String> parameters = new ArrayList<>();
 
     @PostMapping("/install")
-    public ResponseEntity install(@RequestParam("tenantId") String tenantId, @RequestParam("userId") String userId, @RequestParam("oauth_consumer_key") String oauth_consumer_key) {
+    public ResponseEntity install(@RequestParam("tenantId") String tenantId,
+                                  @RequestParam("userId") String userId,
+                                  @RequestParam("UserName") String userName,
+                                  @RequestParam("SiteId") String siteId,
+                                  @RequestParam("SiteName") String siteName,
+                                  @RequestParam("AppId") String appId,
+                                  @RequestParam("oauth_consumer_key") String oauth_consumer_key
+    ) {
         parameters.add(tenantId);
         parameters.add(userId);
+        parameters.add(userName);
+        parameters.add(siteId);
+        parameters.add(siteName);
+        parameters.add(appId);
         parameters.add(oauth_consumer_key);
         return ResponseEntity.ok(tenantId);
     }
