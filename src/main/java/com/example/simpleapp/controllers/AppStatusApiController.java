@@ -3,14 +3,14 @@ package com.example.simpleapp.controllers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class AppStatusApiController {
     @PostMapping("/install")
-    public ResponseEntity install(@RequestBody String data) {
-        return ResponseEntity.ok(data);
+    public ResponseEntity install(@RequestParam("InstallId") String installId) {
+        return ResponseEntity.ok(installId);
     }
 
     @PostMapping("/uninstall")
