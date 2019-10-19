@@ -17,9 +17,9 @@ public class AppStatusApiController {
     public ResponseEntity install(@RequestParam("tenantId") String tenantId,
                                   @RequestParam("userId") String userId,
                                   @RequestParam("userName") String userName,
-                                  @RequestParam("SiteId") String siteId,
-                                  @RequestParam("SiteName") String siteName,
-                                  @RequestParam("AppId") String appId,
+                                  @RequestParam("siteId") String siteId,
+                                  @RequestParam("siteName") String siteName,
+                                  @RequestParam("appId") String appId,
                                   @RequestParam("oauth_consumer_key") String oauth_consumer_key
     ) {
         parameters.add(tenantId);
