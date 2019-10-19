@@ -16,7 +16,7 @@ public class AppStatusApiController {
     @PostMapping("/install")
     public ResponseEntity install(@RequestParam("tenantId") String tenantId,
                                   @RequestParam("userId") String userId,
-                                  @RequestParam("UserName") String userName,
+                                  @RequestParam("userName") String userName,
                                   @RequestParam("SiteId") String siteId,
                                   @RequestParam("SiteName") String siteName,
                                   @RequestParam("AppId") String appId,
