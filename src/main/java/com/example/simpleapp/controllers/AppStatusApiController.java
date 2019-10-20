@@ -33,13 +33,36 @@ public class AppStatusApiController {
     }
 
     @PostMapping("/uninstall")
-    public ResponseEntity uninstall() {
-        return ResponseEntity.ok("");
+    public ResponseEntity uninstall(@RequestParam("tenantId") String tenantId,
+                                    @RequestParam("userId") String userId,
+                                    @RequestParam("userName") String userName,
+                                    @RequestParam("siteId") String siteId,
+                                    @RequestParam("siteName") String siteName,
+                                    @RequestParam("appId") String appId,
+                                    @RequestParam("oauth_consumer_key") String oauth_consumer_key
+    ) {
+        parameters.removeAll(parameters);
+        parameters.add(oauth_consumer_key);
+        return ResponseEntity.ok(parameters);
     }
 
     @PostMapping("/configure")
-    public ResponseEntity configure() {
-        return ResponseEntity.ok("");
+    public ResponseEntity configure(@RequestParam("tenantId") String tenantId,
+                                    @RequestParam("userId") String userId,
+                                    @RequestParam("userName") String userName,
+                                    @RequestParam("siteId") String siteId,
+                                    @RequestParam("siteName") String siteName,
+                                    @RequestParam("appId") String appId,
+                                    @RequestParam("oauth_consumer_key") String oauth_consumer_key
+    ) {
+        parameters.add(tenantId);
+        parameters.add(userId);
+        parameters.add(userName);
+        parameters.add(siteId);
+        parameters.add(siteName);
+        parameters.add(appId);
+        parameters.add(oauth_consumer_key);
+        return ResponseEntity.ok(tenantId);
     }
 
     @GetMapping("/status")
