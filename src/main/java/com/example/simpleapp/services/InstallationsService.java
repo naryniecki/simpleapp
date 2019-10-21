@@ -35,6 +35,7 @@ public class InstallationsService {
         installation.setDataFoxTokens(eloquaTokens);
         installation.setEloquaTokens(dataFoxTokens);
         installation.setStatus("configured");
+        repository.save(installation);
     }
 
     public String getInstallationStatus(String installId) {
