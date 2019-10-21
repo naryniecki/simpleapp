@@ -42,7 +42,7 @@ public class AppStatusApiController {
         return ResponseEntity.ok(installId);
     }
 
-    @PostMapping("/configure")
+    @GetMapping("/configure")
     public ResponseEntity configure(@RequestParam("installId") String installId,
                                     @RequestParam("userId") String userId,
                                     @RequestParam("userName") String userName,
