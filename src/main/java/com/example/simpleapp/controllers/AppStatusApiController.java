@@ -25,8 +25,7 @@ public class AppStatusApiController {
                                   @RequestParam("userName") String userName,
                                   @RequestParam("siteId") String siteId,
                                   @RequestParam("siteName") String siteName,
-                                  @RequestParam("appId") String appId,
-                                  @RequestParam("oauth_consumer_key") String oauth_consumer_key
+                                  @RequestParam("appId") String appId
     ) {
         installationsService.installApplication(installId, userId, userName, siteId, siteName, appId);
         return ResponseEntity.ok(installId);
@@ -37,9 +36,7 @@ public class AppStatusApiController {
                                     @RequestParam("userId") String userId,
                                     @RequestParam("userName") String userName,
                                     @RequestParam("siteId") String siteId,
-                                    @RequestParam("siteName") String siteName,
-                                    @RequestParam("appId") String appId,
-                                    @RequestParam("oauth_consumer_key") String oauth_consumer_key
+                                    @RequestParam("siteName") String siteName
     ) {
         installationsService.uninstallApplication(installId);
         return ResponseEntity.ok(installId);
@@ -51,8 +48,7 @@ public class AppStatusApiController {
                                     @RequestParam("userName") String userName,
                                     @RequestParam("siteId") String siteId,
                                     @RequestParam("siteName") String siteName,
-                                    @RequestParam("appId") String appId,
-                                    @RequestParam("oauth_consumer_key") String oauth_consumer_key
+                                    @RequestParam("appId") String appId
     ) {
         installationsService.configureApplication(installId,true, true);
         return ResponseEntity.ok(installId);
