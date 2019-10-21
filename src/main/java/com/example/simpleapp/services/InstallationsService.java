@@ -5,6 +5,9 @@ import com.example.simpleapp.repositories.LocalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class InstallationsService {
 
@@ -34,8 +37,14 @@ public class InstallationsService {
         installation.setStatus("configured");
     }
 
-    public Installation getInstallationStatus(String installId) {
+    public String getInstallationStatus(String installId) {
         Installation installation = repository.findById(installId).orElseThrow(() -> new RuntimeException("No installation found with id: " + installId));
-        return installation;
+        return installation.getStatus();
+    }
+
+    public List<Installation> getAllInstallations() {
+        List<Installation> all = new ArrayList<>();
+        repository.findAll().forEach(all::add);
+        return all;
     }
 }

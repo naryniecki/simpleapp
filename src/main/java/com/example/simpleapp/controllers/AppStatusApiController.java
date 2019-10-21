@@ -1,5 +1,6 @@
 package com.example.simpleapp.controllers;
 
+import com.example.simpleapp.models.Installation;
 import com.example.simpleapp.services.InstallationsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +42,7 @@ public class AppStatusApiController {
                                     @RequestParam("oauth_consumer_key") String oauth_consumer_key
     ) {
         installationsService.uninstallApplication(installId);
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok(installId);
     }
 
     @PostMapping("/configure")
@@ -60,6 +61,11 @@ public class AppStatusApiController {
     @GetMapping("/status")
     public ResponseEntity status(@RequestParam("installId") String installId) {
         return ResponseEntity.ok(installationsService.getInstallationStatus(installId));
+    }
+
+    @GetMapping("/all")
+    public List<Installation> all() {
+        return installationsService.getAllInstallations();
     }
 }
 
