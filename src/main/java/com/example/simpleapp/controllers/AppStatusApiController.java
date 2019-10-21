@@ -1,5 +1,7 @@
 package com.example.simpleapp.controllers;
 
+import com.example.simpleapp.services.InstallationsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,10 +13,13 @@ import java.util.List;
 
 @RestController
 public class AppStatusApiController {
-    private List<String> parameters = new ArrayList<>();
+
+    @Autowired
+    private InstallationsService installationsService;
+    private List<String> secrets = new ArrayList<>();
 
     @PostMapping("/install")
-    public ResponseEntity install(@RequestParam("tenantId") String tenantId,
+    public ResponseEntity install(@RequestParam("installId") String installId,
                                   @RequestParam("userId") String userId,
                                   @RequestParam("userName") String userName,
                                   @RequestParam("siteId") String siteId,
@@ -22,18 +27,12 @@ public class AppStatusApiController {
                                   @RequestParam("appId") String appId,
                                   @RequestParam("oauth_consumer_key") String oauth_consumer_key
     ) {
-        parameters.add(tenantId);
-        parameters.add(userId);
-        parameters.add(userName);
-        parameters.add(siteId);
-        parameters.add(siteName);
-        parameters.add(appId);
-        parameters.add(oauth_consumer_key);
-        return ResponseEntity.ok(tenantId);
+        installationsService.installApplication(installId, userId, userName, siteId, siteName, appId);
+        return ResponseEntity.ok(installId);
     }
 
     @PostMapping("/uninstall")
-    public ResponseEntity uninstall(@RequestParam("tenantId") String tenantId,
+    public ResponseEntity uninstall(@RequestParam("installId") String installId,
                                     @RequestParam("userId") String userId,
                                     @RequestParam("userName") String userName,
                                     @RequestParam("siteId") String siteId,
@@ -41,13 +40,12 @@ public class AppStatusApiController {
                                     @RequestParam("appId") String appId,
                                     @RequestParam("oauth_consumer_key") String oauth_consumer_key
     ) {
-        parameters.removeAll(parameters);
-        parameters.add(oauth_consumer_key);
-        return ResponseEntity.ok(parameters);
+        installationsService.uninstallApplication(installId);
+        return ResponseEntity.ok("");
     }
 
     @PostMapping("/configure")
-    public ResponseEntity configure(@RequestParam("tenantId") String tenantId,
+    public ResponseEntity configure(@RequestParam("installId") String installId,
                                     @RequestParam("userId") String userId,
                                     @RequestParam("userName") String userName,
                                     @RequestParam("siteId") String siteId,
@@ -55,19 +53,13 @@ public class AppStatusApiController {
                                     @RequestParam("appId") String appId,
                                     @RequestParam("oauth_consumer_key") String oauth_consumer_key
     ) {
-        parameters.add(tenantId);
-        parameters.add(userId);
-        parameters.add(userName);
-        parameters.add(siteId);
-        parameters.add(siteName);
-        parameters.add(appId);
-        parameters.add(oauth_consumer_key);
-        return ResponseEntity.ok(tenantId);
+        installationsService.configureApplication(installId,"Eloqua", "DataFox");
+        return ResponseEntity.ok(installId);
     }
 
     @GetMapping("/status")
-    public ResponseEntity status() {
-        return ResponseEntity.ok(parameters.toString());
+    public ResponseEntity status(@RequestParam("installId") String installId) {
+        return ResponseEntity.ok(installationsService.getInstallationStatus(installId));
     }
 }
 
