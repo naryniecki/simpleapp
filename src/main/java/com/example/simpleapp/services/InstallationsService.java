@@ -27,7 +27,7 @@ public class InstallationsService {
         repository.deleteById(installId);
     }
 
-    public void configureApplication(String installId, String eloquaTokens, String dataFoxTokens) {
+    public void configureApplication(String installId, boolean eloquaTokens, boolean dataFoxTokens) {
         Installation installation = repository.findById(installId).orElseThrow(() -> new RuntimeException("No installation found with id: " + installId));
         installation.setDataFoxTokens(eloquaTokens);
         installation.setEloquaTokens(dataFoxTokens);

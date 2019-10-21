@@ -15,13 +15,13 @@ public class Installation {
     private String siteName;
     private String appId;
     private String status; // installed, configured, data-matched, data-enriched
-    private String eloquaTokens; // present, absent, incomplete
-    private String dataFoxTokens; //present, absent, incomplete
+    private boolean eloquaTokens; // present, absent, incomplete
+    private boolean dataFoxTokens; //present, absent, incomplete
 
     public Installation() {
     }
 
-    public Installation(String installId, String userId, String userName, String siteId, String siteName, String appId, String status, String eloquaTokens, String dataFoxTokens) {
+    public Installation(String installId, String userId, String userName, String siteId, String siteName, String appId, String status, boolean eloquaTokens, boolean dataFoxTokens) {
         this.installId = installId;
         this.userId = userId;
         this.userName = userName;
@@ -89,19 +89,19 @@ public class Installation {
         this.status = status;
     }
 
-    public String getEloquaTokens() {
+    public boolean getEloquaTokens() {
         return eloquaTokens;
     }
 
-    public void setEloquaTokens(String eloquaTokens) {
+    public void setEloquaTokens(boolean eloquaTokens) {
         this.eloquaTokens = eloquaTokens;
     }
 
-    public String getDataFoxTokens() {
+    public boolean getDataFoxTokens() {
         return dataFoxTokens;
     }
 
-    public void setDataFoxTokens(String dataFoxTokens) {
+    public void setDataFoxTokens(boolean dataFoxTokens) {
         this.dataFoxTokens = dataFoxTokens;
     }
 
@@ -110,15 +110,15 @@ public class Installation {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Installation that = (Installation) o;
-        return installId.equals(that.installId) &&
-                userId.equals(that.userId) &&
+        return eloquaTokens == that.eloquaTokens &&
+                dataFoxTokens == that.dataFoxTokens &&
+                installId.equals(that.installId) &&
+                Objects.equals(userId, that.userId) &&
                 Objects.equals(userName, that.userName) &&
-                siteId.equals(that.siteId) &&
+                Objects.equals(siteId, that.siteId) &&
                 Objects.equals(siteName, that.siteName) &&
                 appId.equals(that.appId) &&
-                Objects.equals(status, that.status) &&
-                Objects.equals(eloquaTokens, that.eloquaTokens) &&
-                Objects.equals(dataFoxTokens, that.dataFoxTokens);
+                Objects.equals(status, that.status);
     }
 
     @Override
@@ -136,8 +136,8 @@ public class Installation {
                 ", siteName='" + siteName + '\'' +
                 ", appId='" + appId + '\'' +
                 ", status='" + status + '\'' +
-                ", eloquaTokens='" + eloquaTokens + '\'' +
-                ", dataFoxTokens='" + dataFoxTokens + '\'' +
+                ", eloquaTokens=" + eloquaTokens +
+                ", dataFoxTokens=" + dataFoxTokens +
                 '}';
     }
 }

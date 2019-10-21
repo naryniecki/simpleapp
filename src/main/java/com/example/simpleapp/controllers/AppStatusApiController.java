@@ -53,7 +53,7 @@ public class AppStatusApiController {
                                     @RequestParam("appId") String appId,
                                     @RequestParam("oauth_consumer_key") String oauth_consumer_key
     ) {
-        installationsService.configureApplication(installId,"Eloqua", "DataFox");
+        installationsService.configureApplication(installId,true, true);
         return ResponseEntity.ok(installId);
     }
 
