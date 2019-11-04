@@ -35,7 +35,7 @@ public class AppStatusApiController {
         return new ModelAndView("redirect:https://login.eloqua.com/auth/oauth2/authorize" +
                 "?response_type=code" +
                 "&client_id=" + appId +
-                "4&redirect_uri=" + callback +
+                "&redirect_uri=" + callback +
                 "&scope=full");
     }
 
