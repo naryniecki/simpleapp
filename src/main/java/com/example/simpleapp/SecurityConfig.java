@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login*", ELOQUA_AUTHORIZATION_CODE_ENDPOINT, ELOQUA_CONFIGURE_ENDPOINT)
+                .antMatchers("/login*", ELOQUA_AUTHORIZATION_CODE_ENDPOINT)
                 .permitAll()
                 .anyRequest()
                 .authenticated()
