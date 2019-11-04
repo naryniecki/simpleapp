@@ -18,7 +18,7 @@ spring:
             client-name: datafox-client
             provider: datafox-provider
             scope: full
-            redirect-uri: https://mfhw.herokuapp.com/code
+            redirect-uri: http://localhost:8080/code
             client-authentication-method: basic
             authorization-grant-type: authorization_code
         provider:
