@@ -32,7 +32,7 @@ public class AppStatusApiController {
                                   @RequestParam("callback") String callback
     ) {
         installationsService.installApplication(installId, userId, userName, siteId, siteName, appId);
-        return new ModelAndView("redirect:login.eloqua.com/auth/oauth2/authorize");
+        return new ModelAndView("redirect:https://login.eloqua.com/auth/oauth2/authorize");
     }
 
     @PostMapping("/uninstall")
