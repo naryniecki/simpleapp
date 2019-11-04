@@ -23,16 +23,15 @@ public class AppStatusApiController {
     private List<String> secrets = new ArrayList<>();
 
     @PostMapping("/install")
-    public ModelAndView install(@RequestParam("installId") String installId,
+    public ResponseEntity install(@RequestParam("installId") String installId,
                                   @RequestParam("userId") String userId,
                                   @RequestParam("userName") String userName,
                                   @RequestParam("siteId") String siteId,
                                   @RequestParam("siteName") String siteName,
-                                  @RequestParam("appId") String appId,
-                                  @RequestParam("callback") String callback
+                                  @RequestParam("appId") String appId
     ) {
         installationsService.installApplication(installId, userId, userName, siteId, siteName, appId);
-        return new ModelAndView("redirect:" + callback);
+        return ResponseEntity.ok(installId);
     }
 
     @PostMapping("/uninstall")
@@ -47,15 +46,16 @@ public class AppStatusApiController {
     }
 
     @GetMapping("/configure")
-    public ResponseEntity configure(@RequestParam("installId") String installId,
-                                    @RequestParam("userId") String userId,
-                                    @RequestParam("userName") String userName,
-                                    @RequestParam("siteId") String siteId,
-                                    @RequestParam("siteName") String siteName,
-                                    @RequestParam("appId") String appId
+    public ModelAndView configure(@RequestParam("installId") String installId,
+                                  @RequestParam("userId") String userId,
+                                  @RequestParam("userName") String userName,
+                                  @RequestParam("siteId") String siteId,
+                                  @RequestParam("siteName") String siteName,
+                                  @RequestParam("appId") String appId,
+                                  @RequestParam("callback") String callback
     ) {
         installationsService.configureApplication(installId, true, true);
-        return ResponseEntity.ok(installId);
+        return new ModelAndView("redirect:" + callback);
     }
 
     @GetMapping("/status")
