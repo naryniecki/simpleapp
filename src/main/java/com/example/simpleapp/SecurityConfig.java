@@ -30,6 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(ELOQUA_UNINSTALL_ENDPOINT, ELOQUA_STATUS_ENDPOINT, "/all");
+        web.ignoring().antMatchers(ELOQUA_CONFIGURE_ENDPOINT, ELOQUA_INSTALL_ENDPOINT, ELOQUA_UNINSTALL_ENDPOINT, ELOQUA_STATUS_ENDPOINT);
     }
 }
