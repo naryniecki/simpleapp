@@ -1,0 +1,30 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          eloqua:
+            client-id: 1
+            client-secret: 1
+            client-name: eloqua-client
+            provider: eloqua-provider
+            scope: full
+            redirect-uri: http://localhost:8080/code
+            client-authentication-method: basic
+            authorization-grant-type: authorization_code
+          datafox:
+            client-id: QTq99RDQuE0dquqALZQG9UZ3C5ADuEdc
+            client-secret: tWibXM0LEgJsTTpcnOMvhvx77W1Qubmu
+            client-name: datafox-client
+            provider: datafox-provider
+            scope: full
+            redirect-uri: http://localhost:8080/code
+            client-authentication-method: basic
+            authorization-grant-type: authorization_code
+        provider:
+          eloqua-provider:
+            authorization-uri: https://login.eloqua.com/auth/oauth2/authorize
+            token-uri: https://login.eloqua.com/auth/oauth2/token
+          datafox-provider:
+            authorization-uri: https://app.datafox.com/oauth2/authorize
+            token-uri: https://app.datafox.com/oauth2/token

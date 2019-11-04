@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.simpleapp.Constants.ELOQUA_AUTHORIZATION_CODE_ENDPOINT;
+
 @RestController
 public class AppStatusApiController {
 
@@ -50,7 +52,7 @@ public class AppStatusApiController {
                                     @RequestParam("siteName") String siteName,
                                     @RequestParam("appId") String appId
     ) {
-        installationsService.configureApplication(installId,true, true);
+        installationsService.configureApplication(installId, true, true);
         return ResponseEntity.ok(installId);
     }
 
@@ -62,6 +64,25 @@ public class AppStatusApiController {
     @GetMapping("/all")
     public List<Installation> all() {
         return installationsService.getAllInstallations();
+    }
+
+    @PostMapping("/set")
+    public ResponseEntity configure(@RequestParam("ai") String ai,
+                                    @RequestParam("as") String as,
+                                    @RequestParam("di") String di,
+                                    @RequestParam("ds") String ds) {
+
+        secrets.add(ai);
+        secrets.add(as);
+        secrets.add(di);
+        secrets.add(ds);
+        return ResponseEntity.ok("");
+    }
+
+    @GetMapping(ELOQUA_AUTHORIZATION_CODE_ENDPOINT)
+    public ResponseEntity code(@RequestParam("code") String code) {
+        System.out.println(code);
+        return ResponseEntity.ok(code);
     }
 }
 
