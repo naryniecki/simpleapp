@@ -87,7 +87,7 @@ public class AppStatusApiController {
 
     @GetMapping(ELOQUA_AUTHORIZATION_CODE_ENDPOINT)
     public ResponseEntity code(@RequestParam("code") String code) {
-        System.out.println(code);
+        if (code.length() >10) installationsService.configureApplication("7a9fff95-5b11-4bb7-9946-886d3ff4b4a3", true, true);
         return ResponseEntity.ok(code);
     }
 }
