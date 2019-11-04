@@ -23,15 +23,16 @@ public class AppStatusApiController {
     private List<String> secrets = new ArrayList<>();
 
     @PostMapping("/install")
-    public ResponseEntity install(@RequestParam("installId") String installId,
+    public ModelAndView install(@RequestParam("installId") String installId,
                                   @RequestParam("userId") String userId,
                                   @RequestParam("userName") String userName,
                                   @RequestParam("siteId") String siteId,
                                   @RequestParam("siteName") String siteName,
-                                  @RequestParam("appId") String appId
+                                  @RequestParam("appId") String appId,
+                                  @RequestParam("callback") String callback
     ) {
         installationsService.installApplication(installId, userId, userName, siteId, siteName, appId);
-        return ResponseEntity.ok(installId);
+        return new ModelAndView("redirect:login.eloqua.com/auth/oauth2/authorize");
     }
 
     @PostMapping("/uninstall")
@@ -46,16 +47,15 @@ public class AppStatusApiController {
     }
 
     @GetMapping("/configure")
-    public ModelAndView configure(@RequestParam("installId") String installId,
-                                  @RequestParam("userId") String userId,
-                                  @RequestParam("userName") String userName,
-                                  @RequestParam("siteId") String siteId,
-                                  @RequestParam("siteName") String siteName,
-                                  @RequestParam("appId") String appId,
-                                  @RequestParam("callback") String callback
+    public ResponseEntity configure(@RequestParam("installId") String installId,
+                                    @RequestParam("userId") String userId,
+                                    @RequestParam("userName") String userName,
+                                    @RequestParam("siteId") String siteId,
+                                    @RequestParam("siteName") String siteName,
+                                    @RequestParam("appId") String appId
     ) {
         installationsService.configureApplication(installId, true, true);
-        return new ModelAndView("redirect:https://login.eloqua.com/auth/oauth2/authorize");
+        return ResponseEntity.ok(installId);
     }
 
     @GetMapping("/status")
