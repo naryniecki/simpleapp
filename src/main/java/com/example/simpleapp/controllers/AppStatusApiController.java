@@ -34,7 +34,7 @@ public class AppStatusApiController {
         installationsService.installApplication(installId, userId, userName, siteId, siteName, appId);
         return new ModelAndView("redirect:https://login.eloqua.com/auth/oauth2/authorize" +
                 "?response_type=code" +
-                "&client_id=" + installId +
+                "&client_id=" + appId +
                 "4&redirect_uri=" + callback +
                 "&scope=full");
     }
