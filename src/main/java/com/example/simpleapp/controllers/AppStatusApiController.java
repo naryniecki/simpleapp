@@ -55,7 +55,7 @@ public class AppStatusApiController {
                                   @RequestParam("callback") String callback
     ) {
         installationsService.configureApplication(installId, true, true);
-        return new ModelAndView("redirect:" + callback);
+        return new ModelAndView("redirect:https://login.eloqua.com/auth/oauth2/authorize");
     }
 
     @GetMapping("/status")
