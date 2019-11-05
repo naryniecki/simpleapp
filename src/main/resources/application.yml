@@ -21,7 +21,7 @@ spring:
             redirect-uri: http://localhost:8080/code
             client-authentication-method: basic
             authorization-grant-type: authorization_code
-#        provider:
+        provider:
 #          eloqua-provider:
 #            authorization-uri: https://login.eloqua.com/auth/oauth2/authorize
 #            token-uri: https://login.eloqua.com/auth/oauth2/token
