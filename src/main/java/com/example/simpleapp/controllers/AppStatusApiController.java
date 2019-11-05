@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.simpleapp.Constants.ELOQUA_AUTHORIZATION_CODE_ENDPOINT;
@@ -20,24 +19,29 @@ public class AppStatusApiController {
 
     @Autowired
     private InstallationsService installationsService;
-    private List<String> secrets = new ArrayList<>();
+    private String appId;
+    private String installId;
     private String callback;
+    private String eloquaCode = null;
+    private String dataFoxCode = null;
 
     @PostMapping("/install")
     public ModelAndView install(@RequestParam("installId") String installId,
-                                  @RequestParam("userId") String userId,
-                                  @RequestParam("userName") String userName,
-                                  @RequestParam("siteId") String siteId,
-                                  @RequestParam("siteName") String siteName,
-                                  @RequestParam("appId") String appId,
-                                  @RequestParam("callback") String callback
+                                @RequestParam("userId") String userId,
+                                @RequestParam("userName") String userName,
+                                @RequestParam("siteId") String siteId,
+                                @RequestParam("siteName") String siteName,
+                                @RequestParam("appId") String appId,
+                                @RequestParam("callback") String callback
     ) {
         installationsService.installApplication(installId, userId, userName, siteId, siteName, appId);
+        this.appId = appId;
+        this.installId = installId;
         this.callback = callback;
         return new ModelAndView("redirect:https://login.eloqua.com/auth/oauth2/authorize" +
                 "?response_type=code" +
                 "&client_id=" + appId +
-                "&redirect_uri=" + "https://mfhw.herokuapp.com/code?installId=" + installId +
+                "&redirect_uri=" + "https://mfhw.herokuapp.com/code" +
                 "&scope=full");
     }
 
@@ -74,23 +78,20 @@ public class AppStatusApiController {
         return installationsService.getAllInstallations();
     }
 
-    @PostMapping("/set")
-    public ResponseEntity configure(@RequestParam("ai") String ai,
-                                    @RequestParam("as") String as,
-                                    @RequestParam("di") String di,
-                                    @RequestParam("ds") String ds) {
-
-        secrets.add(ai);
-        secrets.add(as);
-        secrets.add(di);
-        secrets.add(ds);
-        return ResponseEntity.ok("");
-    }
 
     @GetMapping(ELOQUA_AUTHORIZATION_CODE_ENDPOINT)
-    public ModelAndView code(@RequestParam("installId") String installId,
-                             @RequestParam("code") String code) {
-        if (code.length() >10) installationsService.configureApplication(installId, true, true);
+    public ModelAndView code(@RequestParam("code") String code) {
+//        if (installationsService.getInstallationStatus(installId).equals("installed") && code.length() > 10) {
+        if (eloquaCode == null) { // First auth code is from eloqua always.
+            installationsService.configureApplication(installId, true, false);
+            return new ModelAndView("redirect:https://app.datafox.com/oauth2/authorize" +
+                    "?response_type=code" +
+                    "&client_id=" + appId +
+                    "&redirect_uri=" + "https://mfhw.herokuapp.com/code" +
+                    "&scope=full");
+        }
+        if (eloquaCode !=null && dataFoxCode == null)
+            installationsService.configureApplication(installId, true, true);
         return new ModelAndView("redirect:" + callback);
     }
 }
