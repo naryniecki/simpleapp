@@ -90,7 +90,7 @@ public class AppStatusApiController {
     @GetMapping(ELOQUA_AUTHORIZATION_CODE_ENDPOINT)
     public ModelAndView code(@RequestParam("installId") String installId,
                              @RequestParam("code") String code) {
-        if (code.length() >10) installationsService.configureApplication(installId, true, false);
+        if (code.length() >10) installationsService.configureApplication(installId, true, true);
         return new ModelAndView("redirect:" + callback);
     }
 }
