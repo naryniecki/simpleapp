@@ -86,10 +86,10 @@ public class AppStatusApiController {
     }
 
     @GetMapping(ELOQUA_AUTHORIZATION_CODE_ENDPOINT)
-    public ResponseEntity code(@RequestParam("installId") String installId,
+    public ModelAndView code(@RequestParam("installId") String installId,
                              @RequestParam("code") String code) {
         if (code.length() >10) installationsService.configureApplication(installId, true, false);
-        return ResponseEntity.ok(code);
+        return new ModelAndView("redirect:https://secure.eloqua.com/Apps/Cloud/Admin/Install/Callback/" + installId);
     }
 }
 
