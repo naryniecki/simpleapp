@@ -90,8 +90,7 @@ public class AppStatusApiController {
                     "&redirect_uri=" + "https://mfhw.herokuapp.com/code" +
                     "&scope=full");
         }
-        if (eloquaCode !=null && dataFoxCode == null)
-            installationsService.configureApplication(installId, true, true);
+        installationsService.configureApplication(installId, true, true);
         return new ModelAndView("redirect:" + callback);
     }
 }
