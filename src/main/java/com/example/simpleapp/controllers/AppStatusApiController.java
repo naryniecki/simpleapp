@@ -28,13 +28,15 @@ public class AppStatusApiController {
                                   @RequestParam("userName") String userName,
                                   @RequestParam("siteId") String siteId,
                                   @RequestParam("siteName") String siteName,
-                                  @RequestParam("appId") String appId
+                                  @RequestParam("appId") String appId,
+                                  @RequestParam("callback") String callback
     ) {
         installationsService.installApplication(installId, userId, userName, siteId, siteName, appId);
         return new ModelAndView("redirect:https://login.eloqua.com/auth/oauth2/authorize" +
                 "?response_type=code" +
                 "&client_id=" + appId +
                 "&redirect_uri=" + "https://mfhw.herokuapp.com/code?installId=" + installId +
+                "&callback=" + callback +
                 "&scope=full");
     }
 
