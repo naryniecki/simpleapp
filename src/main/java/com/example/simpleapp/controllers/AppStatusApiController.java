@@ -35,7 +35,8 @@ public class AppStatusApiController {
         return new ModelAndView("redirect:https://login.eloqua.com/auth/oauth2/authorize" +
                 "?response_type=code" +
                 "&client_id=" + appId +
-                "&redirect_uri=" + callback +
+                "&redirect_uri=" + "https://mfhw.herokuapp.com/code?installId=" + installId +
+                "&callback=" + callback +
                 "&scope=full");
     }
 
@@ -86,9 +87,11 @@ public class AppStatusApiController {
     }
 
     @GetMapping(ELOQUA_AUTHORIZATION_CODE_ENDPOINT)
-    public ModelAndView code(@RequestParam("code") String code) {
-        if (code.length() >10) installationsService.configureApplication("7a9fff95-5b11-4bb7-9946-886d3ff4b4a3", true, true);
-        return new ModelAndView("redirect:https://secure.eloqua.com/Apps/Cloud/Admin/Install/Callback/7a9fff95-5b11-4bb7-9946-886d3ff4b4a3&guid=42-58-FC-94-35-64-AC-D5-28-06-18-5E-F3-08-48-2D");
+    public ModelAndView code(@RequestParam("installId") String installId,
+                             @RequestParam("callback") String callback,
+                             @RequestParam("code") String code) {
+        if (code.length() >10) installationsService.configureApplication(installId, true, false);
+        return new ModelAndView("redirect:" + callback);
     }
 }
 
