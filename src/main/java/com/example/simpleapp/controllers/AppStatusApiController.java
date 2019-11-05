@@ -28,8 +28,7 @@ public class AppStatusApiController {
                                   @RequestParam("userName") String userName,
                                   @RequestParam("siteId") String siteId,
                                   @RequestParam("siteName") String siteName,
-                                  @RequestParam("appId") String appId,
-                                  @RequestParam("callback") String callback
+                                  @RequestParam("appId") String appId
     ) {
         installationsService.installApplication(installId, userId, userName, siteId, siteName, appId);
         return new ModelAndView("redirect:https://login.eloqua.com/auth/oauth2/authorize" +
