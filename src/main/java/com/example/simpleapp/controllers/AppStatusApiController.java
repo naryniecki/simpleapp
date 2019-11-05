@@ -92,6 +92,8 @@ public class AppStatusApiController {
                     "&scope=full");
         }
         installationsService.configureApplication(installId, true, true);
+        eloquaCode = null;
+        dataFoxCode = null;
         return new ModelAndView("redirect:" + callback);
     }
 }
