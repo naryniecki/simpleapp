@@ -36,7 +36,6 @@ public class AppStatusApiController {
                 "?response_type=code" +
                 "&client_id=" + appId +
                 "&redirect_uri=" + "https://mfhw.herokuapp.com/code?installId=" + installId +
-                "&callback=" + callback +
                 "&scope=full");
     }
 
