@@ -21,6 +21,7 @@ public class AppStatusApiController {
     @Autowired
     private InstallationsService installationsService;
     private List<String> secrets = new ArrayList<>();
+    private String callback;
 
     @PostMapping("/install")
     public ModelAndView install(@RequestParam("installId") String installId,
@@ -32,11 +33,11 @@ public class AppStatusApiController {
                                   @RequestParam("callback") String callback
     ) {
         installationsService.installApplication(installId, userId, userName, siteId, siteName, appId);
+        this.callback = callback;
         return new ModelAndView("redirect:https://login.eloqua.com/auth/oauth2/authorize" +
                 "?response_type=code" +
                 "&client_id=" + appId +
                 "&redirect_uri=" + "https://mfhw.herokuapp.com/code?installId=" + installId +
-                "&callback=" + callback +
                 "&scope=full");
     }
 
@@ -88,7 +89,6 @@ public class AppStatusApiController {
 
     @GetMapping(ELOQUA_AUTHORIZATION_CODE_ENDPOINT)
     public ModelAndView code(@RequestParam("installId") String installId,
-                             @RequestParam("callback") String callback,
                              @RequestParam("code") String code) {
         if (code.length() >10) installationsService.configureApplication(installId, true, false);
         return new ModelAndView("redirect:" + callback);
