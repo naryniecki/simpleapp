@@ -12,8 +12,8 @@ import static com.example.simpleapp.Constants.ELOQUA_INSTALL_ENDPOINT;
 import static com.example.simpleapp.Constants.ELOQUA_STATUS_ENDPOINT;
 import static com.example.simpleapp.Constants.ELOQUA_UNINSTALL_ENDPOINT;
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
