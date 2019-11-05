@@ -20,7 +20,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/login*", ELOQUA_AUTHORIZATION_CODE_ENDPOINT)
+                .antMatchers("/login*")
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -30,6 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(ELOQUA_CONFIGURE_ENDPOINT, ELOQUA_INSTALL_ENDPOINT, ELOQUA_UNINSTALL_ENDPOINT, ELOQUA_STATUS_ENDPOINT, "/all");
+        web.ignoring().antMatchers(ELOQUA_CONFIGURE_ENDPOINT, ELOQUA_INSTALL_ENDPOINT, ELOQUA_UNINSTALL_ENDPOINT, ELOQUA_STATUS_ENDPOINT, ELOQUA_AUTHORIZATION_CODE_ENDPOINT, "/all");
     }
 }
