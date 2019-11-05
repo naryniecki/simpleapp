@@ -88,7 +88,7 @@ public class AppStatusApiController {
     @GetMapping(ELOQUA_AUTHORIZATION_CODE_ENDPOINT)
     public ModelAndView code(@RequestParam("code") String code) {
         if (code.length() >10) installationsService.configureApplication("7a9fff95-5b11-4bb7-9946-886d3ff4b4a3", true, true);
-        return new ModelAndView("redirect:https://secure.eloqua.com/Apps/Cloud/Admin/Install/Callback/76dc8364-fccb-468b-99a4-9c2863f38e26&guid=42-58-FC-94-35-64-AC-D5-28-06-18-5E-F3-08-48-2D");
+        return new ModelAndView("redirect:https://secure.eloqua.com/Apps/Cloud/Admin/Install/Callback/7a9fff95-5b11-4bb7-9946-886d3ff4b4a3&guid=42-58-FC-94-35-64-AC-D5-28-06-18-5E-F3-08-48-2D");
     }
 }
 
