@@ -84,6 +84,7 @@ public class AppStatusApiController {
 //        if (installationsService.getInstallationStatus(installId).equals("installed") && code.length() > 10) {
         if (eloquaCode == null) { // First auth code is from eloqua always.
             installationsService.configureApplication(installId, true, false);
+            eloquaCode = code;
             return new ModelAndView("redirect:https://app.datafox.com/oauth2/authorize" +
                     "?response_type=code" +
                     "&client_id=" + "37IUhSWc8F1AF5AWq4SO5KsdWwUzKO1c" +
