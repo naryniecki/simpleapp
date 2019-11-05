@@ -14,7 +14,7 @@
 ##            authorization-grant-type: authorization_code
 #          datafox:
 #            client-id: QTq99RDQuE0dquqALZQG9UZ3C5ADuEdc
-#            client-secret: tWibXM0LEgJsTTpcnOMvhvx77W1Qubmu
+#            client-secret: 1
 #            client-name: datafox-client
 #            provider: datafox-provider
 #            scope: full

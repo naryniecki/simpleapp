@@ -86,7 +86,7 @@ public class AppStatusApiController {
             installationsService.configureApplication(installId, true, false);
             return new ModelAndView("redirect:https://app.datafox.com/oauth2/authorize" +
                     "?response_type=code" +
-                    "&client_id=" + appId +
+                    "&client_id=" + "37IUhSWc8F1AF5AWq4SO5KsdWwUzKO1c" +
                     "&redirect_uri=" + "https://mfhw.herokuapp.com/code" +
                     "&scope=full");
         }
