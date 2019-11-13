@@ -87,7 +87,7 @@ public class AppStatusApiController {
             eloquaCode = code;
             return new ModelAndView("redirect:https://app.datafox.com/oauth2/authorize" +
                     "?response_type=code" +
-                    "&client_id=" + "37IUhSWc8F1AF5AWq4SO5KsdWwUzKO1c" +
+                    "&client_id=" + "111" +
                     "&redirect_uri=" + "http://localhost:8080/v1/initializer/authorize" +
                     "&scope=full");
         }
