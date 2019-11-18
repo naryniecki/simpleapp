@@ -41,7 +41,7 @@ public class AppStatusApiController {
         return new ModelAndView("redirect:https://login.eloqua.com/auth/oauth2/authorize" +
                 "?response_type=code" +
                 "&client_id=" + appId +
-                "&redirect_uri=" + "http://localhost:8080/v1/initializer/authorize" +
+                "&redirect_uri=" + "https://mfhw.herokuapp.com/code" +
                 "&scope=full");
     }
 
@@ -87,8 +87,8 @@ public class AppStatusApiController {
             eloquaCode = code;
             return new ModelAndView("redirect:https://app.datafox.com/oauth2/authorize" +
                     "?response_type=code" +
-                    "&client_id=" + "111" +
-                    "&redirect_uri=" + "http://localhost:8080/v1/initializer/authorize" +
+                    "&client_id=" + "37IUhSWc8F1AF5AWq4SO5KsdWwUzKO1c" +
+                    "&redirect_uri=" + "https://mfhw.herokuapp.com/code" +
                     "&scope=full");
         }
         installationsService.configureApplication(installId, true, true);
